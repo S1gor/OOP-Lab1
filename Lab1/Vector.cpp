@@ -26,8 +26,6 @@ int Vector::getSize()
 
 void Vector::fillRandomly(int min, int max)
 {
-	srand(time(NULL));
-
 	data = new int[size];
 	for (int i = 0; i < size; i++)
 		data[i] = rand() % (max - min) + min;
@@ -57,4 +55,28 @@ void Vector::clear()
 	delete data;
 	size = 0;
 	data = 0;
+}
+
+bool Vector::operator==(Vector& vector)
+{
+	if (size != vector.size)	return false;
+	int counter = 0;
+	for (int i = 0; i < size; i++)
+		if (data[i] == vector.data[i])
+			counter++;
+	
+	if (counter == size)	return true;
+	return false;
+}
+
+bool Vector::operator!=(Vector& vector)
+{
+	if (size != vector.size)	return true;
+	int counter = 0;
+	for (int i = 0; i < size; i++)
+		if (data[i] != vector.data[i])
+			counter++;
+
+	if (counter == size)	return true;
+	return false;
 }

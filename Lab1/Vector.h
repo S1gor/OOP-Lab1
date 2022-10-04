@@ -17,4 +17,7 @@ public:
 
 	void print();
 	void clear();
+
+	bool operator==(Vector& vector);
+	bool operator!=(Vector& vector);
 };

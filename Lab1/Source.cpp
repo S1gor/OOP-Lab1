@@ -6,11 +6,25 @@
 
 int main()
 {
-	Vector v;
+	srand(time(NULL));
 
-	v.scanSize();
-	v.fillRandomly(1, 50);
-	v.print();
+	Vector v1, v2;
+
+	v1.scanSize();
+	v2.scanSize();
+	v1.fillManually();
+	v2.fillManually();
+	v1.print();
+	v2.print();
+	/*if (v1.operator==(v2))
+		printf("V1==V2\n");
+	else
+		printf("False\n");*/
+
+	if (v1.operator!=(v2))
+		printf("V1!=V2");
+	else
+		printf("False");
 
 	return 0;
 }
