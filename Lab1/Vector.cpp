@@ -6,7 +6,7 @@ Vector::Vector()
 
 Vector::~Vector()
 {
-	delete data;
+	delete[] data;
 }
 
 int Vector::scanSize()
@@ -22,6 +22,14 @@ int Vector::scanSize()
 int Vector::getSize()
 {
 	return size;
+}
+
+float Vector::getLen()
+{
+	float sum = 0;
+	for (int i = 0; i < getSize(); i++)
+		sum += data[i] * data[i];
+	return sqrt(sum);
 }
 
 void Vector::fillRandomly(int min, int max)
@@ -59,24 +67,15 @@ void Vector::clear()
 
 bool Vector::operator==(Vector& vector)
 {
-	if (size != vector.size)	return false;
-	int counter = 0;
-	for (int i = 0; i < size; i++)
-		if (data[i] == vector.data[i])
-			counter++;
-	
-	if (counter == size)	return true;
-	return false;
+	return getLen() == vector.getLen();
 }
 
 bool Vector::operator!=(Vector& vector)
 {
-	if (size != vector.size)	return true;
-	int counter = 0;
-	for (int i = 0; i < size; i++)
-		if (data[i] != vector.data[i])
-			counter++;
+	return getLen() != vector.getLen();
+}
 
-	if (counter == size)	return true;
-	return false;
+bool operator<(float a, Vector& vector)
+{
+	return a < vector.getLen();
 }

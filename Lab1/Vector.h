@@ -11,6 +11,7 @@ public:
 
 	int scanSize();
 	int getSize();
+	float getLen();
 
 	void fillRandomly(int min, int max);
 	void fillManually();
@@ -20,4 +21,5 @@ public:
 
 	bool operator==(Vector& vector);
 	bool operator!=(Vector& vector);
+	friend bool operator<(float a, Vector& vector);
 };

@@ -8,23 +8,11 @@ int main()
 {
 	srand(time(NULL));
 
-	Vector v1, v2;
-
+	Vector v1;
+	
 	v1.scanSize();
-	v2.scanSize();
-	v1.fillManually();
-	v2.fillManually();
+	v1.fillRandomly(1, 10);
 	v1.print();
-	v2.print();
-	/*if (v1.operator==(v2))
-		printf("V1==V2\n");
-	else
-		printf("False\n");*/
-
-	if (v1.operator!=(v2))
-		printf("V1!=V2");
-	else
-		printf("False");
 
 	return 0;
 }
