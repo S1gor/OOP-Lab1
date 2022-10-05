@@ -19,12 +19,12 @@ int Vector::setSize()
 	return size;
 }
 
-int Vector::getSize()
+int Vector::getSize() const
 {
 	return size;
 }
 
-float Vector::getLen()
+float Vector::getLen() const
 {
 	float sum = 0;
 	for (int i = 0; i < getSize(); i++)
@@ -32,14 +32,14 @@ float Vector::getLen()
 	return sqrt(sum);
 }
 
-void Vector::fillRandomly(int min, int max)
+void Vector::setDataRandomly(int min, int max)
 {
 	data = new int[size];
 	for (int i = 0; i < size; i++)
 		data[i] = rand() % (max - min) + min;
 }
 
-void Vector::fillManually()
+void Vector::setDataManually()
 {
 	data = new int[size];
 	for (int i = 0; i < size; i++)
@@ -50,7 +50,7 @@ void Vector::fillManually()
 	printf("\n");
 }
 
-void Vector::print()
+void Vector::print() const
 {
 	printf("Vector:\n");
 	for (int i = 0; i < size; i++)
@@ -60,7 +60,7 @@ void Vector::print()
 void Vector::clear()
 {
 	if (!size)	return;
-	delete data;
+	delete[] data;
 	size = 0;
 	data = 0;
 }
@@ -75,7 +75,7 @@ bool Vector::operator!=(Vector& vector)
 	return getLen() != vector.getLen();
 }
 
-bool operator<(float a, Vector& vector)
+bool operator<(float a, Vector const& vector)
 {
 	return a < vector.getLen();
 }

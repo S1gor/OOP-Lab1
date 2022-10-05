@@ -10,16 +10,18 @@ public:
 	~Vector();
 
 	int setSize();
-	int getSize();
-	float getLen();
+	int getSize() const;
 
-	void fillRandomly(int min, int max);
-	void fillManually();
+	float getLen() const;
 
-	void print();
+	void setDataRandomly(int min, int max);
+	void setDataManually();
+
+	void print() const;
+
 	void clear();
 
 	bool operator==(Vector& vector);
 	bool operator!=(Vector& vector);
-	friend bool operator<(float a, Vector& vector);
+	friend bool operator<(float value, Vector const& vector);
 };
