@@ -10,7 +10,7 @@ int main()
 
 	Vector v1;
 	
-	v1.scanSize();
+	v1.setSize();
 	v1.fillRandomly(1, 10);
 	v1.print();
 

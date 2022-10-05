@@ -7,15 +7,15 @@ Vector::Vector()
 Vector::~Vector()
 {
 	delete[] data;
+	size = 0;
 }
 
-int Vector::scanSize()
+int Vector::setSize()
 {
 	printf("Enter the size of the vector (1 - 100): ");
 	do {
 		scanf_s("%d", &size);
-	} while (size <= 0 || size > 100);
-
+	} while (size < 1 || size > 100);
 	return size;
 }
 
@@ -54,7 +54,7 @@ void Vector::print()
 {
 	printf("Vector:\n");
 	for (int i = 0; i < size; i++)
-		printf("%2d - %2d\n", i + 1, data[i]);
+		printf("[%2d] - %2d\n", i + 1, data[i]);
 }
 
 void Vector::clear()

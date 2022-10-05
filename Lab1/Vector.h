@@ -2,14 +2,14 @@
 
 class Vector
 {
-	int* data;
-	int size;
+	int* data = 0;
+	int size = 0;
 
 public:
 	Vector();
 	~Vector();
 
-	int scanSize();
+	int setSize();
 	int getSize();
 	float getLen();
 
