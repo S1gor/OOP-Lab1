@@ -2,11 +2,14 @@
 
 class Vector
 {
-	int* data = 0;
+	float* data = nullptr;
 	int size = 0;
 
 public:
 	Vector();
+	Vector(int size);
+	Vector(float x, float y);
+	Vector(float x, float y, float z);
 	~Vector();
 
 	int setSize();

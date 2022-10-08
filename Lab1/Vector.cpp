@@ -4,10 +4,29 @@
 Vector::Vector()
 {}
 
+Vector::Vector(int size) : size(size)
+{
+	if (size <= 0)	printf("Invalid vector size: %d\n", size);
+}
+
+Vector::Vector(float x, float y) : size(2)
+{
+	data = new float[2];
+	data[0] = x;
+	data[1] = y;
+}
+
+Vector::Vector(float x, float y, float z) : size(3)
+{
+	data = new float[3];
+	data[0] = x;
+	data[1] = y;
+	data[2] = z;
+}
+
 Vector::~Vector()
 {
 	delete[] data;
-	size = 0;
 }
 
 int Vector::setSize()
@@ -34,14 +53,18 @@ float Vector::getLen() const
 
 void Vector::setDataRandomly(int min, int max)
 {
-	data = new int[size];
+	if (size <= 0)	return;
+
+	data = new float[size];
 	for (int i = 0; i < size; i++)
 		data[i] = rand() % (max - min) + min;
 }
 
 void Vector::setDataManually()
 {
-	data = new int[size];
+	if (size <= 0)	return;
+
+	data = new float[size];
 	for (int i = 0; i < size; i++)
 	{
 		printf("Enter vector[%d] = ", i + 1);
@@ -52,9 +75,11 @@ void Vector::setDataManually()
 
 void Vector::print() const
 {
+	if (data == nullptr)	return;
+
 	printf("Vector:\n");
 	for (int i = 0; i < size; i++)
-		printf("[%2d] - %2d\n", i + 1, data[i]);
+		printf("[%2d] - %.1f\n", i + 1, data[i]);
 }
 
 void Vector::clear()
@@ -62,7 +87,7 @@ void Vector::clear()
 	if (!size)	return;
 	delete[] data;
 	size = 0;
-	data = 0;
+	data = nullptr;
 }
 
 bool Vector::operator==(Vector& vector)
