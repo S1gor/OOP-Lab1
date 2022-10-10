@@ -10,10 +10,18 @@ int main()
 {
 	srand(time(NULL));
 
-	Vector v1, v2;
+	Vector v1;
+
 	v1.setSize();
-	v1.setDataRandomly(1, 10);
-	v1.print();
+	v1.setDataRandomly();
+	cout << v1 << endl;
+
+	Vector v2(5);
+	v2.setDataRandomly();
+	cout << v2 << endl;
+
+	//cout << v1 + v2 << endl;
+
 
 	return 0;
 }

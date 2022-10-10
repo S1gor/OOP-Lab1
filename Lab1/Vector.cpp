@@ -73,13 +73,13 @@ float Vector::getLen() const
 	return sqrt(sum);
 }
 
-void Vector::setDataRandomly(int min, int max)
+void Vector::setDataRandomly()
 {
 	if (size <= 0)	return;
 
 	data = new float[size];
 	for (int i = 0; i < size; i++)
-		data[i] = rand() % (max - min) + min;
+		data[i] = (rand() % 2001 - 1000.0) / 10;
 }
 
 void Vector::setDataManually()
@@ -108,7 +108,7 @@ void Vector::print() const
 
 	cout << "Vector:" << endl;
 	for (int i = 0; i < size; i++)
-		printf("[%2d] - %.1f\n", i + 1, data[i]);
+		cout << " " << data[i] << " ";
 }
 
 void Vector::clear()
@@ -138,6 +138,16 @@ float& Vector::operator[](int index) const
 	return peek(index);
 }
 
+//Vector Vector::operator+(Vector const& vector) const
+//{
+//	if (size != vector.size)	return 0;
+//
+//	Vector tmp(size);
+//	for (int i = 0; i < size; i++)
+//		tmp.data[i] = data[i] + vector.data[i];
+//	return tmp;
+//}
+
 bool Vector::operator==(Vector& vector)
 {
 	return getLen() == vector.getLen();
@@ -153,9 +163,17 @@ bool operator<(float a, Vector const& vector)
 	return a < vector.getLen();
 }
 
-//std::ostream& operator<<(std::ostream& out, Vector const& vector)
-//{
-//	for (int i = 0; i < vector.size; i++)
-//		out << " " << vector[i] << " ";
-//	return out;
-//}
+std::ostream& operator<<(std::ostream& out, Vector const& vector)
+{
+	cout << "Vector:" << endl;
+	for (int i = 0; i < vector.size; i++)
+		out << " " << vector[i] << " ";
+	return out;
+}
+
+std::istream& operator>>(std::istream& in, Vector& vector)
+{
+	for (int i = 0; i < vector.size; i++)
+		in >> vector[i];
+	return in;
+}
