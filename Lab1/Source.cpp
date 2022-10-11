@@ -13,15 +13,16 @@ int main()
 	Vector v1;
 
 	v1.setSize();
-	v1.setDataRandomly();
+	cin >> v1;
 	cout << v1 << endl;
 
 	Vector v2(5);
-	v2.setDataRandomly();
+	v2.inputRandomly();
 	cout << v2 << endl;
 
-	//cout << v1 + v2 << endl;
-
-
+	cout << "Vector1 + Vector2:\n" << v1 + v2 << endl;
+	cout << "Vector1 + Value:\n" << v1 + 7 << endl;
+	cout << "Value + Vector2:\n" << 7 + v2 << endl;
+	
 	return 0;
 }

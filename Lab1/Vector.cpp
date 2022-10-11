@@ -9,6 +9,7 @@ Vector::Vector()
 Vector::Vector(int size) : size(size)
 {
 	if (size <= 0)	cout << "Invalid vector size: " << size << endl;
+	data = new float[size];
 }
 
 Vector::Vector(float x, float y) : size(2)
@@ -26,6 +27,13 @@ Vector::Vector(float x, float y, float z) : size(3)
 	data[2] = z;
 }
 
+Vector::Vector(Vector& vector2) : size(vector2.size)
+{
+	data = new float[size];
+	for (int i = 0; i < size; i++)
+		data[i] = vector2[i];
+}
+
 Vector::~Vector()
 {
 	delete[] data;
@@ -37,6 +45,7 @@ int Vector::setSize()
 	do {
 		cin >> size;
 	} while (size < 1 || size > 100);
+	data = new float[size];
 	return size;
 }
 
@@ -73,20 +82,18 @@ float Vector::getLen() const
 	return sqrt(sum);
 }
 
-void Vector::setDataRandomly()
+void Vector::inputRandomly()
 {
 	if (size <= 0)	return;
 
-	data = new float[size];
 	for (int i = 0; i < size; i++)
 		data[i] = (rand() % 2001 - 1000.0) / 10;
 }
 
-void Vector::setDataManually()
+void Vector::input()
 {
 	if (size <= 0)	return;
 
-	data = new float[size];
 	for (int i = 0; i < size; i++)
 	{
 		cout << "Enter vector[" << i + 1 << "] = ";
@@ -138,15 +145,42 @@ float& Vector::operator[](int index) const
 	return peek(index);
 }
 
-//Vector Vector::operator+(Vector const& vector) const
-//{
-//	if (size != vector.size)	return 0;
-//
-//	Vector tmp(size);
-//	for (int i = 0; i < size; i++)
-//		tmp.data[i] = data[i] + vector.data[i];
-//	return tmp;
-//}
+Vector Vector::operator+(Vector const& vector) const
+{
+	if (size != vector.size)	return 0;
+
+	Vector tmp(size);
+	for (int i = 0; i < size; i++)
+		tmp[i] = data[i] + vector[i];
+	return tmp;
+}
+
+Vector operator+(Vector const& vector, float val)
+{
+	Vector tmp(vector.size);
+	for (int i = 0; i < vector.size; i++)
+		tmp[i] = vector[i] + val;
+	return tmp;
+}
+
+Vector operator+(float val, Vector const& vector)
+{
+	Vector tmp(vector.size);
+	for (int i = 0; i < vector.size; i++)
+		tmp[i] = vector[i] + val;
+	return tmp;
+}
+
+Vector const& Vector::operator=(Vector const& vector)
+{
+	if (data) delete[] data;
+
+	size = vector.size;
+	data = new float[size];
+	for (int i = 0; i < size; i++)
+		data[i] = vector[i];
+	return *this;
+}
 
 bool Vector::operator==(Vector& vector)
 {
@@ -174,6 +208,9 @@ std::ostream& operator<<(std::ostream& out, Vector const& vector)
 std::istream& operator>>(std::istream& in, Vector& vector)
 {
 	for (int i = 0; i < vector.size; i++)
+	{
+		cout << "Enter vector[" << i + 1 << "] = ";
 		in >> vector[i];
+	}
 	return in;
 }

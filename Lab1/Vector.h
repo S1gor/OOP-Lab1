@@ -11,6 +11,7 @@ public:
 	Vector(int size);
 	Vector(float x, float y);
 	Vector(float x, float y, float z);
+	Vector(Vector& vector2);
 	~Vector();
 
 	int setSize();
@@ -21,8 +22,8 @@ public:
 
 	float getLen() const;
 
-	void setDataRandomly();
-	void setDataManually();
+	void inputRandomly();
+	void input();
 
 	float& peek(int index) const;
 	void print() const;
@@ -32,8 +33,12 @@ public:
 	void multiply(float d);
 
 	float& operator[](int index) const;
-	//Vector operator+(Vector const& vector) const;
 
+	Vector operator+(Vector const& vector) const;
+	friend Vector operator+(Vector const& vector, float val);
+	friend Vector operator+(float val, Vector const& vector);
+
+	Vector const& operator=(Vector const& vector);
 	bool operator==(Vector& vector);
 	bool operator!=(Vector& vector);
 	friend bool operator<(float value, Vector const& vector);
