@@ -27,20 +27,23 @@ Vector::Vector(float x, float y, float z) : size(3)
 	data[2] = z;
 }
 
-Vector::Vector(Vector& vector2) : size(vector2.size)
+Vector::Vector(Vector& vector) : size(vector.size)
 {
 	data = new float[size];
 	for (int i = 0; i < size; i++)
-		data[i] = vector2[i];
+		data[i] = vector[i];
 }
 
 Vector::~Vector()
 {
-	delete[] data;
+	if (data)
+		delete[] data;
 }
 
 int Vector::setSize()
 {
+	if (data) delete[] data;
+
 	cout << "Enter the size of the vector (1 - 100): ";
 	do {
 		cin >> size;
@@ -49,7 +52,7 @@ int Vector::setSize()
 	return size;
 }
 
-int Vector::getSize() const
+int Vector::getSize()
 {
 	return size;
 }
@@ -64,7 +67,7 @@ void Vector::setElem(int index, float d)
 	data[index] = d;
 }
 
-float Vector::getElem(int index) const
+float Vector::getElem(int index)
 {
 	if (index<0 || index >= size)
 	{
@@ -74,7 +77,7 @@ float Vector::getElem(int index) const
 	return data[index];
 }
 
-float Vector::getLen() const
+float Vector::getLen()
 {
 	float sum = 0;
 	for (int i = 0; i < getSize(); i++)
@@ -109,7 +112,7 @@ float& Vector::peek(int index) const
 	return data[index];
 }
 
-void Vector::print() const
+void Vector::print()
 {
 	if (data == nullptr)	return;
 
@@ -192,7 +195,7 @@ bool Vector::operator!=(Vector& vector)
 	return getLen() != vector.getLen();
 }
 
-bool operator<(float a, Vector const& vector)
+bool operator<(float a, Vector& vector)
 {
 	return a < vector.getLen();
 }

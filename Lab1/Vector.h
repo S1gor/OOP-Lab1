@@ -11,22 +11,22 @@ public:
 	Vector(int size);
 	Vector(float x, float y);
 	Vector(float x, float y, float z);
-	Vector(Vector& vector2);
+	Vector(Vector& vector);
 	~Vector();
 
 	int setSize();
-	int getSize() const;
+	int getSize();
 
 	void setElem(int index, float d);
-	float getElem(int index) const;
+	float getElem(int index);
 
-	float getLen() const;
+	float getLen();
 
 	void inputRandomly();
 	void input();
 
 	float& peek(int index) const;
-	void print() const;
+	void print();
 	void clear();
 
 	void add(Vector const& vector);
@@ -41,7 +41,7 @@ public:
 	Vector const& operator=(Vector const& vector);
 	bool operator==(Vector& vector);
 	bool operator!=(Vector& vector);
-	friend bool operator<(float value, Vector const& vector);
+	friend bool operator<(float value, Vector& vector);
 
 	friend std::ostream& operator<<(std::ostream& out, Vector const& vector);
 	friend std::istream& operator>>(std::istream& in, Vector& vector);
